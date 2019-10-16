@@ -82,14 +82,7 @@ import org.apache.nifi.web.security.headers.XSSProtectionFilter;
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.deploy.App;
 import org.eclipse.jetty.deploy.DeploymentManager;
-import org.eclipse.jetty.server.Connector;
-import org.eclipse.jetty.server.Handler;
-import org.eclipse.jetty.server.HttpConfiguration;
-import org.eclipse.jetty.server.HttpConnectionFactory;
-import org.eclipse.jetty.server.SecureRequestCustomizer;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.ServerConnector;
-import org.eclipse.jetty.server.SslConnectionFactory;
+import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.server.handler.ContextHandlerCollection;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -712,6 +705,8 @@ public class JettyServer implements NiFiServer, ExtensionUiLoader {
                     "Check the nifi.properties file and ensure that either the HTTP hostname and port or the HTTPS hostname and port are empty");
             startUpFailure(new IllegalStateException("Only one of the HTTP and HTTPS connectors can be configured at one time"));
         }
+
+        httpConfiguration.addCustomizer(new ForwardedRequestCustomizer());
 
         if (props.getSslPort() != null) {
             configureHttpsConnector(server, httpConfiguration);
