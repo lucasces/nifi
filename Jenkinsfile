@@ -20,7 +20,7 @@ podTemplate(name: 'nifi-build',
                         command: 'cat',
                         alwaysPullImage: true)
         ]) {
-    node('java-maven') {
+    node('nifi-build') {
         stage('Clone') {
             checkout scm
         }
