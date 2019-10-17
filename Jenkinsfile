@@ -1,4 +1,4 @@
-def registry = "docker-snapshots.devops.somosdigital.io"
+def registry = "https://docker-snapshots.devops.somosdigital.io"
 def registrySecrets = "docker-releases"
 def version = "1.9.2"
 def imageName = "apache/nifi:${version}"
