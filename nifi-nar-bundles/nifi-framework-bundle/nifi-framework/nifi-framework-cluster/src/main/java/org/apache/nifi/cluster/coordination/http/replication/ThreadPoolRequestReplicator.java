@@ -789,7 +789,7 @@ public class ThreadPoolRequestReplicator implements RequestReplicator {
 
 
     private URI createURI(final URI exampleUri, final NodeIdentifier nodeId) {
-        return createURI(exampleUri.getScheme(), nodeId.getApiAddress(), nodeId.getApiPort(), exampleUri.getPath(), exampleUri.getQuery());
+        return createURI("http", nodeId.getApiAddress(), nodeId.getApiPort(), exampleUri.getPath(), exampleUri.getQuery());
     }
 
     private URI createURI(final String scheme, final String nodeApiAddress, final int nodeApiPort, final String path, final String query) {
